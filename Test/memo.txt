@@ -1,6 +1,25 @@
+// https://banexdevblog.wordpress.com/2014/06/23/a-quick-tutorial-about-the-fbx-ascii-forma
+
+// http://titech-ssr.blog.jp/archives/1052514217.html
+
+ルート要素
+FBXHeaderExtension
+FileId
+CreationTime
+Creator
+GlobalSettings
+Documents
+References
+Definitions
+Objects
+Connections 
+
+
 // 軸の系とか？(たぶん読まなくてもいい)
 GlobalSettings.Properties70
 
+
+Geometry.prop[2] は "Mesh" と "Shape" がある。必要なのは "Mesh" のみ？
 
 // 頂点
 Objects.Geometry.Vertices.prop[0]
@@ -8,11 +27,31 @@ Objects.Geometry.Vertices.prop[0]
 // 頂点インデックス？
 Objects.Geometry.PolygonVertexIndex.prop[0]
 
+----------------------------------
+Objects.Geometry.Layer を見れば、どのLayerElementがあるかわかる
+
 // 法線
 Objects.Geometry.LayerElementNormal.Normals.prop[0]
+Objects.Geometry.LayerElementNormal.MappingInformationType == "ByPolygonVertex"
+Objects.Geometry.LayerElementNormal.ReferenceInformationType == "Direct"
+
+// 頂点色？
+Objects.Geometry.LayerElementColor.Colors.prop[0]
+Objects.Geometry.LayerElementColor.ColorIndex.prop[0]
+Objects.Geometry.LayerElementColor.MappingInformationType == "ByPolygonVertex"
+Objects.Geometry.LayerElementColor.ReferenceInformationType == "IndexToDirect"
+
+// UV
+Objects.Geometry.LayerElementUV.UV.prop[0]
+Objects.Geometry.LayerElementUV.UVIndex.prop[0]
+Objects.Geometry.LayerElementUV.MappingInformationType == "ByPolygonVertex"
+Objects.Geometry.LayerElementUV.ReferenceInformationType == "IndexToDirect"
 
 // マテリアル(の番号？)
 Objects.Geometry.LayerElementMaterial.Materials.prop[0]
+Objects.Geometry.LayerElementMaterial.MappingInformationType == "AllSame"
+Objects.Geometry.LayerElementMaterial.ReferenceInformationType == "IndexToDirect"       // ？？ これだけかどうかわからない
+
 
 // マテリアル定義(定義されたマテリアルの数だけ Objects.Material がある)
 Objects.Material
@@ -77,3 +116,14 @@ https://stackoverflow.com/questions/7736845/can-anyone-explain-the-fbx-format-fo
 0,1,0,
 0,1,0
 ]
+
+// ---------------------
+
+Blenderのマテリアルについて
+http://rasuka.webcrow.jp/@atelier/tips_Blender/Blender_Material/index.html
+
+鏡面ハイライト
+https://ja.wikipedia.org/wiki/%E9%8F%A1%E9%9D%A2%E3%83%8F%E3%82%A4%E3%83%A9%E3%82%A4%E3%83%88
+
+フレネル反射
+http://marupeke296.com/DXPS_PS_No7_FresnelReflection.html
